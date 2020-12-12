@@ -31,6 +31,7 @@ public class AuthenticatedServlet extends HttpServlet {
         }else{
             req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req,resp);
         }
+
     }
 
 }
