@@ -1,5 +1,7 @@
 package com.lwl.shiro_session.web.session.dao;
 
+import com.lwl.shiro_session.util.RedisUtils;
+import com.lwl.shiro_session.util.SerializableUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
@@ -11,7 +13,10 @@ public class MySessionDao extends CachingSessionDAO {
 
     @Override
     protected Serializable doCreate(Session session) {
-        return null;
+        Serializable sessionId=generateSessionId(session);
+        RedisUtils.getJedis().set(sessionId.toString(), SerializableUtils.serialize(session));
+
+        return sessionId;
     }
 
     @Override
