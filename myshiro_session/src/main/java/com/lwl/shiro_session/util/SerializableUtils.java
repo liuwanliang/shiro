@@ -20,11 +20,12 @@ public class SerializableUtils {
             throw new RuntimeException("serialize session error", e);
         }
     }
+
     public static Session deserialize(String sessionStr) {
         try {
             ByteArrayInputStream bis = new ByteArrayInputStream(Base64.decode(sessionStr));
             ObjectInputStream ois = new ObjectInputStream(bis);
-            return (Session)ois.readObject();
+            return (Session) ois.readObject();
         } catch (Exception e) {
             throw new RuntimeException("deserialize session error", e);
         }

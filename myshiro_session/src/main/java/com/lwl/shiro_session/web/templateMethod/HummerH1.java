@@ -2,7 +2,7 @@ package com.lwl.shiro_session.web.templateMethod;
 
 public class HummerH1 extends HummerModel {
 
-    private boolean alarmFlag=true;
+    private boolean alarmFlag = true;
 
     @Override
     protected void start() {

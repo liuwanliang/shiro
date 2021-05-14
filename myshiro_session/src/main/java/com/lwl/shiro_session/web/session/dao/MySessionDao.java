@@ -13,7 +13,7 @@ public class MySessionDao extends CachingSessionDAO {
 
     @Override
     protected Serializable doCreate(Session session) {
-        Serializable sessionId=generateSessionId(session);
+        Serializable sessionId = generateSessionId(session);
         ShardedJedis redis = RedisUtils.getJedis();
         redis.set(sessionId.toString(), SerializableUtils.serialize(session));
         RedisUtils.closeJedis(redis);
@@ -23,18 +23,18 @@ public class MySessionDao extends CachingSessionDAO {
     @Override
     protected Session doReadSession(Serializable sessionId) {
         ShardedJedis redis = RedisUtils.getJedis();
-        String sessionStr=redis.get(sessionId.toString());
+        String sessionStr = redis.get(sessionId.toString());
 
         return SerializableUtils.deserialize(sessionStr);
     }
 
     @Override
     protected void doUpdate(Session session) {
-        if(session instanceof ValidatingSession && !((ValidatingSession) session).isValid()){
+        if (session instanceof ValidatingSession && !((ValidatingSession) session).isValid()) {
             return;
         }
         ShardedJedis redis = RedisUtils.getJedis();
-        redis.set(session.getId().toString(),SerializableUtils.serialize(session));
+        redis.set(session.getId().toString(), SerializableUtils.serialize(session));
         RedisUtils.closeJedis(redis);
     }
 

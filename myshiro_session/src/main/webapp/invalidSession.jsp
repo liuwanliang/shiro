@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-      会话已无效，请重新登录。<a href="${pageContext.request.contextPath}/login.jsp">点击登录</a><br/>
+会话已无效，请重新登录。<a href="${pageContext.request.contextPath}/login.jsp">点击登录</a><br/>
 </body>
 </html>
